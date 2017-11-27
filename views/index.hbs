@@ -124,17 +124,17 @@
     <h1 class="title">Login</h1>
     <form id="login_form" method="post">
       <div class="input-container">
-        <input type="#{type}" id="name" required="required"/>
+        <input type="#{type}" id="name" required="required" name="name"/>
         <label for="#{label}">Name</label>
         <div class="bar"></div>
       </div>
       <div class="input-container">
-        <input type="#{type}" id="eroll_no" required="required"/>
+        <input type="#{type}" id="eroll_no" required="required" name="eroll_no"/>
         <label for="#{label}">Roll Number</label>
         <div class="bar"></div>
       </div>
       <div class="button-container">
-        <button onclick="validateLogin(login_form)"><span>Go</span></button>
+        <button type="submit"><span>Go</span></button>
         <!-- <script>
           function myFunction() {
             alert("hi");

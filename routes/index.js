@@ -5,15 +5,39 @@ var conn = require('../db');
 
 //database variables
 
+var username;
+var eroll_no;
+var type;
+var score;
+var events_to='5';
+var events_at='3';
+var user;
+var roll;
+
+router.post('/', function(req, res, next) {
+
+  console.log("posted");
+
+
+    user = req.body.name;
+    roll = req.body.eroll_no;
+
+    console.log(user, roll);
+      conn.acquire(function(err,con){
+        con.query("SELECT eroll_no, name FROM student_details", function (err, result, fields) {
+          result.forEach(function(obj){
+            if(obj.name==user && obj.eroll_no==roll){
+              res.redirect(301, '/#about');
+            }
+          });
+          res.render('error', {message:'Login failed', message2:'Incorrect name/roll'});
+        });
+      });
+});
 
 router.get('/', function(req, res, next) {
   conn.acquire(function(err,con){
-    var username;
-    var eroll_no;
-    var type;
-    var score;
-    var events_to='5';
-    var events_at='3';
+
     con.query("SELECT eroll_no, name FROM student_details", function (err, result, fields) {
   		if (err) throw err;
 
@@ -49,8 +73,7 @@ router.get('/', function(req, res, next) {
 
 	});
 
-  })
-
+});
 });
 
 module.exports = router;
